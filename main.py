@@ -1,5 +1,6 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
 
 # getting file
 matches = pd.read_csv('season-2425.csv')
@@ -22,3 +23,10 @@ test = matches[matches["Date"] > "2025-01-01"]
 predictors = ["Day_Code", "Opponent_Code"]
 
 rf.fit(train[predictors], train["Target"])
+RandomForestClassifier(min_samples_split=10, n_estimators=50, random_state=1)
+preds = rf.predict(test[predictors])
+
+
+# Testing out the accurcey
+acc = accuracy_score(test["Target"], preds)
+print(acc)
